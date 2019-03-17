@@ -27,10 +27,13 @@ void loop() {
 void toggleled1() {
   led1State = !led1State;
   digitalWrite(led1Pin, led1State);
+  Serial.println("Interrupt Button 1");
 }
 
 void toggleled2() {
+  Serial.println("Interrupt Button 2");
   led2State = !led2State;
   digitalWrite(led2Pin, led2State);
+  
 }
 

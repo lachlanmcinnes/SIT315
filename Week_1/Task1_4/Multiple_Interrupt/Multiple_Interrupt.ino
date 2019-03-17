@@ -42,10 +42,12 @@ void loop() {
 ISR(PCINT2_vect){
   led1State = !led1State;
   digitalWrite(led1Pin, led1State);
+  Serial.println("Interrupt in pins D0-D7");
 }
 
 ISR(PCINT0_vect){
   led3State = !led3State;
   digitalWrite(led3Pin, led3State);
+  Serial.println("Interrupt in pins D8-D13");
 }
 
