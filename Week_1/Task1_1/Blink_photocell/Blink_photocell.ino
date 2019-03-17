@@ -1,23 +1,24 @@
-int photocellPin = 0;     // the cell and 10K pulldown are connected to a0
-int photocellReading;     // the analog reading from the sensor divider
-int LEDpin = 11;          // connect Red LED to pin 11 (PWM pin)
-int LEDbrightness;        // 
+const int button1Pin = 2;
+const int led1Pin =  13;  
+
+int butRead;
+
+
 void setup(void) {
   Serial.begin(9600);   
-  pinMode(LEDpin,OUTPUT);
+  pinMode(led1Pin, OUTPUT);
+  pinMode(button1Pin, INPUT);
 }
  
 void loop(void) {
-  photocellReading = analogRead(photocellPin);  
- 
-  Serial.print("Analog reading = ");
-  Serial.println(photocellReading);     // the raw analog reading
+  butRead = digitalRead(button1Pin);  
 
-  if (photocellReading > 100) {
-    digitalWrite(11,HIGH);
+
+  if (butRead == HIGH) {
+    digitalWrite(led1Pin,HIGH);
     Serial.println("Turn On");
   }else{
-    digitalWrite(11,LOW);
+    digitalWrite(led1Pin,LOW);
     Serial.println("Turn Off");
   }
  
