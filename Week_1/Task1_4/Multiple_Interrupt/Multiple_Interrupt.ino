@@ -20,6 +20,9 @@ void pciSetup(byte pin){
 void setup() {
   // put your setup code here, to run once:
 
+  Serial.begin(9600);
+  Serial.println("Hello World!");
+
   pinMode(led1Pin, OUTPUT);
   pinMode(led2Pin, OUTPUT);
   pinMode(led3Pin, OUTPUT);
