@@ -1,26 +1,28 @@
-const int button1Pin = 2;
-const int led1Pin =  13;  
+const int btn_pin = 2;
+const int led_pin = 5;
 
-int butRead;
+uint8_t flag = 0;
 
+void setup() {
+  DDRD &= ~(1<<btn_pin);
+  PORTD |= (1<<led_pin);
 
-void setup(void) {
-  Serial.begin(9600);   
-  pinMode(led1Pin, OUTPUT);
-  pinMode(button1Pin, INPUT);
+  DDRD |= (1<<led_pin);
+
+  EICRA |= (1<<ISC01);
+
+  EICRA &= ~(1<<ISC00);
+
+  EIMSK |= (1<<INT0);
+
+  sei();
 }
- 
-void loop(void) {
-  butRead = digitalRead(button1Pin);  
 
-
-  if (butRead == HIGH) {
-    digitalWrite(led1Pin,HIGH);
-    Serial.println("Turn On");
-  }else{
-    digitalWrite(led1Pin,LOW);
-    Serial.println("Turn Off");
-  }
- 
-  delay(1000);
+void loop() {
+  delay(500);
 }
+
+ISR(INT0_vect){
+  PORTD ^= (1<<led_pin);
+}
+

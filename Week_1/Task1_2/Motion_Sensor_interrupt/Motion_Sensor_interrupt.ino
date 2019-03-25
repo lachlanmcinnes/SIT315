@@ -17,6 +17,11 @@ void loop()  {
 void toggle() {
   ledState = !ledState;
   digitalWrite(led,ledState);
-  Serial.println(ledState);
+  if (ledState == 1){
+    Serial.println("Interrupt! LED turned on");
+  }else{
+    Serial.println("Interrupt! LED turned off");
+  }
+  
 }
 
