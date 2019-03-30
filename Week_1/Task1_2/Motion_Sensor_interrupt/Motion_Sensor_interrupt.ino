@@ -2,7 +2,6 @@ int sensPin = 2;
 int led = 6;
 int ledState = LOW;
 
-
 void setup()  {
   Serial.begin(9600);
   pinMode(sensPin,INPUT_PULLUP);
@@ -10,17 +9,19 @@ void setup()  {
 
   attachInterrupt(digitalPinToInterrupt(sensPin),toggle,CHANGE);
 }
+
 void loop()  {
     delay(2000);
 }
 
 void toggle() {
-  ledState = !ledState;
-  digitalWrite(led,ledState);
-  if (ledState == 1){
-    Serial.println("Interrupt! LED turned on");
-  }else{
-    Serial.println("Interrupt! LED turned off");
+  int sensState = digitalRead(sensPin);
+
+  Serial.println(sensState);
+  
+  if (digitalRead(sensState) == HIGH){
+    ledState = !ledState;
+    digitalWrite(led,ledState);
   }
   
 }
