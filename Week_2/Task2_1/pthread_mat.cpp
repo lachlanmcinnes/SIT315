@@ -7,8 +7,8 @@
 using namespace std;
 using namespace std::chrono;
 
-#define N 200
-#define MAX_THREAD 2
+#define N 10
+#define MAX_THREAD 4
 
 int a[N][N];
 int b[N][N];
@@ -18,7 +18,7 @@ int step_i = 0;
 void* multi(void *arg){
     int core = step_i++;
 
-    for (int i = core*N/2; i<(core + 1)*N/2;i++){
+    for (int i = core*N/MAX_THREAD; i<(core + 1)*N/MAX_THREAD;i++){
         for (int j = 0; j< N; j++){
             for (int k = 0;k<N;k++){
                 c[i][j] += a[i][k]*b[k][j];

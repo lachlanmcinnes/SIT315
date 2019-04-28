@@ -7,7 +7,7 @@
 using namespace std;
 using namespace std::chrono;
 
-#define N 200
+#define N 1000
 #define MAX_THREAD 2
 
 int a[N][N];

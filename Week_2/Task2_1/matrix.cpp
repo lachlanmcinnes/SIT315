@@ -10,7 +10,7 @@ int main() {
 
     cout << "Hello World!" << "\n";
 
-    int N = 200;
+    int N = 1000;
 
     int a[N][N];
     int b[N][N];
