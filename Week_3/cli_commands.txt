@@ -1,0 +1,5 @@
+MPI:
+
+$HOME/opt/usr/local/bin/mpic++ -std=c++11 -o mpi_mat2 ./mpi_mat2.cpp
+
+$HOME/opt/usr/local/bin/mpirun -np 4 ./mpi_mat2
