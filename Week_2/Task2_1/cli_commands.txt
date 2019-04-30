@@ -8,6 +8,8 @@ clang++ -std=c++11 -Xpreprocessor -fopenmp -o openmp_out openmp_mat.cpp
 
 Task 2.2
 
-clang++ -std=c++11 -o hi t.cpp
+clang++ -std=c++11 -o qsort_out quicksort2.cpp
 
-clang++ -std=c++11 -pthread -o T pt_qsort3.cpp
+clang++ -std=c++11 -pthread -o pt_qs_out pt_qsort2.cpp
+
+clang++ -std=c++11 -Xpreprocessor -fopenmp -o omp_qs_out openmp_qsort2.cpp
