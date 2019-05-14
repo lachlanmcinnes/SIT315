@@ -14,3 +14,11 @@ OPENCL:
 
 $HOME/opt/usr/local/bin/mpic++ -std=c++11 -framework OpenCL -o mpi_ocl_mat ./mpi_ocl_mat.cpp
 
+clang++ opencl.cpp -framework OpenCL -o O
+
+
+
+
+
+/System/Library/Frameworks/OpenCL.framework/Versions/A/Headers/cl.h
+
