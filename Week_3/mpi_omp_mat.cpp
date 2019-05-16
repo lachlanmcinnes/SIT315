@@ -7,12 +7,13 @@
 #include <ctime>
 #include <chrono>
 
-#define N 4
+#define N 10
 
 using namespace std;
 using namespace std::chrono;
 
 void print_results(int a[N][N]);
+void init (int a[N][N]);
 
 int main(int argc, char *argv[]){
     int i,j,k;
@@ -21,10 +22,13 @@ int main(int argc, char *argv[]){
     int blksz;
     int sum = 0;
 
-    int a[N][N] = {{1,2,3,4},{5,6,7,8},{9,1,2,3},{4,5,6,7}};
-    int b[N][N] = {{1,2,3,4},{5,6,7,8},{9,1,2,3},{4,5,6,7}};
+    int a[N][N];
+    int b[N][N];
     int c[N][N];
     int aa[N], cc[N];
+
+    init(a);
+    init(b);
 
     auto start = high_resolution_clock::now();
 
@@ -58,10 +62,20 @@ int main(int argc, char *argv[]){
     auto duration = duration_cast<microseconds>(stop - start); 
 
     if (rank == 0){
-        print_results(c);
+        //print_results(c);
         cout << "Execution time = " << duration.count() << " microseconds\n";
     }
 
+}
+
+void init (int a[N][N]) {
+   for(int i=0; i < N; i++) {
+      int add = 0;
+      for(int j=0; j < N; j++) {
+         a[i][j] = rand() % 10 ;//+ add;
+         add += 10;
+      } 
+   }
 }
 
 void print_results(int a[N][N]){

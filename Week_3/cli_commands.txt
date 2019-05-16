@@ -4,6 +4,8 @@ $HOME/opt/usr/local/bin/mpic++ -std=c++11 -o mpi_mat2 ./mpi_mat2.cpp
 
 $HOME/opt/usr/local/bin/mpirun -np 4 ./mpi_mat2
 
+$HOME/opt/usr/local/bin/mpirun -np 20 ./mpi_mat2
+
 OPENMP:
 
 $HOME/opt/usr/local/bin/mpic++ -std=c++11 -openmp -o mpi_omp_mat ./mpi_omp_mat.cpp
@@ -13,6 +15,10 @@ $HOME/opt/usr/local/bin/mpirun -np 4 ./mpi_omp_mat
 OPENCL:
 
 $HOME/opt/usr/local/bin/mpic++ -std=c++11 -framework OpenCL -o mpi_cl_mat ./mpi_cl_mat.cpp
+
+$HOME/opt/usr/local/bin/mpirun -np 4 ./mpi_cl_mat
+
+
 
 clang++ opencl.cpp -framework OpenCL -o O
 

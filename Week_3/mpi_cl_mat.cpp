@@ -7,12 +7,12 @@
 #include <ctime>
 #include <chrono>
 #include <OpenCL/cl.h>
-#define MAX 4
-#define N 4
+#define MAX 10
 
 typedef unsigned int uint;
 #define clCreateCommandQueueWithProperties clCreateCommandQueue
 
+using namespace std::chrono;
 
 cl_device_id device_id;
 cl_context context;
@@ -51,22 +51,24 @@ int main(int argc, char *argv[]) {
     init(a);
     init(b);
 
-    print_matrix(a);
+    //print_matrix(a);
     printf("\n........\n");
-    print_matrix(b);
+    //print_matrix(b);
     printf("\n........\n");
 
     matrix_mul(a,b,c);
-    print_matrix(c);
+    //print_matrix(c);
     printf("\n........\n");
+
+    auto start = high_resolution_clock::now();
 
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    MPI_Scatter(a, N*N/size, MPI_INT, a, N*N/size, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatter(a, MAX*MAX/size, MPI_INT, a, MAX*MAX/size, MPI_INT, 0, MPI_COMM_WORLD);
 
-    MPI_Bcast(b, N*N, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Bcast(b, MAX*MAX, MPI_INT, 0, MPI_COMM_WORLD);
 
         setup_openCL_device_context_queue_kernel();
         setup_kernel_memory();
@@ -80,11 +82,18 @@ int main(int argc, char *argv[]) {
 
         free_memory();
 
-    MPI_Gather(c, N*N/size, MPI_INT, c, N*N/size, MPI_INT, 0, MPI_COMM_WORLD);
+   MPI_Gather(c, MAX*MAX/size, MPI_INT, c, MAX*MAX/size, MPI_INT, 0, MPI_COMM_WORLD);
 
-    MPI_Finalize();
+   MPI_Finalize();
 
-    print_matrix(c);
+   auto stop = high_resolution_clock::now();
+
+   auto duration = duration_cast<microseconds>(stop - start);
+
+   if (rank == 0){
+        //print_matrix(c);
+        printf("Execution time = %d microseconds\n", duration);
+    }
    
 }  
 
